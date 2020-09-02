@@ -70,9 +70,9 @@ export class DemoRoom extends Room {
     });
   }
 
-  async onAuth (_client: Client, options: any) {
+  async onAuth (_client: Client, options: any): Promise<boolean> {
     console.log("onAuth(), options!", options);
-    return true;
+    return false;
   }
 
   populateEnemies () {
