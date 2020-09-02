@@ -8,6 +8,7 @@ public class GameController : MonoBehaviour {
 
     Room<State> room;
     try {
+      Debug.Log("Joining room...");
       room = await client.JoinOrCreate<State>("demo");
       Debug.Log("Joined room successfully!");
     } catch (Exception e) {
