@@ -14,3 +14,5 @@ cd server
 npm install
 npm start
 ```
+
+Open Unity project in the `./unityClient/` dir, click play, and look at the logs.
