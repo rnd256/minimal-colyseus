@@ -1,6 +1,5 @@
-import { Room, Client, generateId } from "colyseus";
-import { Schema, type, MapSchema, ArraySchema } from "@colyseus/schema";
-import { verifyToken, User, IUser } from "@colyseus/social";
+import { MapSchema, Schema, type } from "@colyseus/schema";
+import { Client, generateId, Room } from "colyseus";
 
 class Entity extends Schema {
   @type("number")
@@ -29,8 +28,8 @@ class State extends Schema {
  * Demonstrate sending schema data types as messages
  */
 class Message extends Schema {
-  @type("number") num;
-  @type("string") str;
+  @type("number") num: number;
+  @type("string") str: string;
 }
 
 export class DemoRoom extends Room {
@@ -71,9 +70,9 @@ export class DemoRoom extends Room {
     });
   }
 
-  async onAuth (client, options) {
+  async onAuth (_client: Client, options: any) {
     console.log("onAuth(), options!", options);
-    return await User.findById(verifyToken(options.token)._id);
+    return true;
   }
 
   populateEnemies () {
@@ -85,7 +84,7 @@ export class DemoRoom extends Room {
     }
   }
 
-  onJoin (client: Client, options: any, user: IUser) {
+  onJoin (client: Client, _options: any) {
     console.log("client joined!", client.sessionId);
     this.state.entities[client.sessionId] = new Player();
 
@@ -111,7 +110,7 @@ export class DemoRoom extends Room {
   }
 
 
-  update (dt?: number) {
+  update (_dt?: number) {
     // console.log("num clients:", Object.keys(this.clients).length);
   }
 

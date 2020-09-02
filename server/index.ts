@@ -1,11 +1,8 @@
-import http from "http";
-import express from "express";
-import cors from "cors";
-
 import { Server } from "colyseus";
+import cors from "cors";
+import express from "express";
+import http from "http";
 import { DemoRoom } from "./DemoRoom";
-
-import socialRoutes from "@colyseus/social/express";
 import { FossilDeltaTestRoom } from "./FossilDeltaTestRoom";
 
 const PORT = Number(process.env.PORT || 2567);
@@ -27,9 +24,7 @@ const gameServer = new Server({
 gameServer.define("demo", DemoRoom);
 gameServer.define("fossildelta", FossilDeltaTestRoom);
 
-app.use("/", socialRoutes);
-
-app.get("/something", function (req, res) {
+app.get("/something", function (_req, res) {
   console.log("something!", process.pid);
   res.send("Hey!");
 });
